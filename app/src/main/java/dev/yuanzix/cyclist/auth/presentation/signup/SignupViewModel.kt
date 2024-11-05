@@ -3,7 +3,6 @@ package dev.yuanzix.cyclist.auth.presentation.signup
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.yuanzix.cyclist.auth.domain.AuthRepository
-import dev.yuanzix.cyclist.auth.presentation.login.LoginEvent
 import dev.yuanzix.cyclist.core.data.UserPreferencesDataStore
 import dev.yuanzix.cyclist.core.domain.util.onError
 import dev.yuanzix.cyclist.core.domain.util.onSuccess
@@ -57,7 +56,7 @@ class SignupViewModel(
                             email = state.value.email,
                             jwtToken = it.token
                         )
-                        _events.send(SignupEvent.NavigateToHome)
+                        _events.send(SignupEvent.NavigateToDash)
                     }.onError { error ->
                         _events.send(SignupEvent.Error(error))
                     }

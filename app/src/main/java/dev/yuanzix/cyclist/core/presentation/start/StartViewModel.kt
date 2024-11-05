@@ -27,7 +27,7 @@ class StartViewModel(
 
             if (!token.isNullOrEmpty()) {
                 authRepository.verifyToken(token).onSuccess {
-                    _events.send(StartEvent.NavigateToHome)
+                    _events.send(StartEvent.NavigateToDash)
                 }.onError {
                     _events.send(StartEvent.NavigateToLogin)
                 }

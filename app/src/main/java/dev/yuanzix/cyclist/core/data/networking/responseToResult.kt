@@ -16,6 +16,7 @@ suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<
             }
         }
 
+        404 -> Result.Error(NetworkError.NotFound)
         408 -> Result.Error(NetworkError.RequestTimeout)
         429 -> Result.Error(NetworkError.TooManyRequests)
         in 500..599 -> Result.Error(NetworkError.ServerError)

@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "dev.yuanzix.cyclist"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -66,8 +66,15 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.navigation.compose)
+
     implementation(libs.compose.material.icons.extended)
+
     implementation(libs.datastore)
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network)
+
+    implementation(libs.wheel.picker.compose)
 
     implementation(libs.bundles.koin)
 

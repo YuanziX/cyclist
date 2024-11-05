@@ -1,6 +1,5 @@
 package dev.yuanzix.cyclist.core.navigation
 
-import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -18,8 +17,8 @@ fun NavGraphBuilder.startComposable(
 
         ObserveAsEvents(events = viewModel.events, onEvent = { event ->
             when (event) {
-                is StartEvent.NavigateToHome -> {
-                    navController.navigate(Destination.Dash.Home) {
+                is StartEvent.NavigateToDash -> {
+                    navController.navigate(Destination.Dash) {
                         popUpTo<Destination.StartScreen> {
                             inclusive = true
                         }

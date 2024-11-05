@@ -28,8 +28,8 @@ fun NavGraphBuilder.loginComposable(
 
         ObserveAsEvents(events = viewModel.events, onEvent = { event ->
             when (event) {
-                is LoginEvent.NavigateToHome -> {
-                    navController.navigate(Destination.Dash.Home)
+                is LoginEvent.NavigateToDash -> {
+                    navController.navigate(Destination.Dash)
                 }
 
                 is LoginEvent.NavigateToSignup -> {
@@ -60,8 +60,8 @@ fun NavGraphBuilder.signupComposable(
 
         ObserveAsEvents(events = viewModel.events, onEvent = { event ->
             when (event) {
-                is SignupEvent.NavigateToHome -> {
-                    navController.navigate(Destination.Dash.Home)
+                is SignupEvent.NavigateToDash -> {
+                    navController.navigate(Destination.Dash)
                 }
 
                 is SignupEvent.NavigateToLogin -> {

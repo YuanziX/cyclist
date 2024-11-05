@@ -7,9 +7,10 @@ import dev.yuanzix.cyclist.core.domain.util.NetworkError
 import dev.yuanzix.cyclist.core.domain.util.Result
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
-import io.ktor.http.headers
+import io.ktor.http.HttpHeaders
 
 class RemoteAuthRepository(
     private val ktorClient: HttpClient
@@ -17,9 +18,7 @@ class RemoteAuthRepository(
     override suspend fun verifyToken(token: String): Result<Verify, NetworkError> {
         return safeCall<Verify> {
             ktorClient.get(urlString = constructUrl("user/verify")) {
-                headers {
-                    append("Authorization", "Bearer $token")
-                }
+                header(HttpHeaders.Authorization, "Bearer $token")
             }
         }
     }

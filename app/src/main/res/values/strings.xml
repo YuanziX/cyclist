@@ -16,4 +16,13 @@
     <string name="go_to_login">Already have an account? Login</string>
     <string name="show_hide_password">Show/Hide password</string>
     <string name="qr_code_scanner">Scan QR code</string>
+    <string name="error_not_found">Requested data not found</string>
+    <string name="price_per_day">Price Per Day</string>
+    <string name="price_per_hour">Price per hour</string>
+    <string name="show_available_time">Show Available Time</string>
+    <string name="select_start_time">Pick Start Time</string>
+    <string name="select_end_time">Pick end time</string>
+    <string name="rent_bike">Rent Bike!</string>
+    <string name="unlock_cycle">Unlock Cycle</string>
+    <string name="rented_cycle_greeting">Here\'s your currently rented cycle, unlock as required</string>
 </resources>

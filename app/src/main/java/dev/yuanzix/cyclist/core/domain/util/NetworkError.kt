@@ -9,6 +9,7 @@ interface NetworkError : Error {
     object ServerError : NetworkError
     object SerializationError : NetworkError
     object UnknownError : NetworkError
+    object NotFound : NetworkError
 
     @Serializable
     data class KnownError(val error: String) : NetworkError

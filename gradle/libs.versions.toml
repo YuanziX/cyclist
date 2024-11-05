@@ -13,6 +13,8 @@ koin = "3.5.6"
 navigation = "2.8.3"
 compose-material-icons-extended = "1.7.5"
 datastore = "1.1.1"
+coil-compose = "3.0.0-rc02"
+wheel-picker-compose = "1.1.11"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +42,9 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "compose-material-icons-extended" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil-compose" }
+coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil-compose" }
+wheel-picker-compose = { group = "com.github.commandiron", name = "WheelPickerCompose", version.ref = "wheel-picker-compose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

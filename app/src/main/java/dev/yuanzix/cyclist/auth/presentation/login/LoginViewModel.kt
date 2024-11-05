@@ -1,6 +1,5 @@
 package dev.yuanzix.cyclist.auth.presentation.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.yuanzix.cyclist.auth.domain.AuthRepository
@@ -50,7 +49,7 @@ class LoginViewModel(
                         userPreferencesDataStore.saveUserDetails(
                             email = state.value.email, jwtToken = it.token
                         )
-                        _events.send(LoginEvent.NavigateToHome)
+                        _events.send(LoginEvent.NavigateToDash)
                     }.onError { error ->
                         _events.send(LoginEvent.Error(error))
                     }
