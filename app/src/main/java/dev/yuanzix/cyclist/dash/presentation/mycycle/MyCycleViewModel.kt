@@ -38,8 +38,7 @@ class MyCycleViewModel(
 
             is MyCycleAction.LocateCycle -> {
                 action.ctx.openNavigationLink(
-                    _state.value.bicycle!!.location.lat,
-                    _state.value.bicycle!!.location.lng
+                    _state.value.bicycle!!.location.lat, _state.value.bicycle!!.location.lng
                 )
             }
         }
@@ -71,16 +70,25 @@ class MyCycleViewModel(
 
     private fun unlockBicycle() {
         viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    isAwaitingUnlock = true
+                )
+            }
             bicycleDataSource.unlockBicycle(
                 rentalId = _state.value.rentalId!!,
                 token = dataStore.jwtToken.first()!!,
             ).onSuccess {
-                // Connect to WiFi and send signal
                 bicycleDataSource.sendSignalToLock(
                     url = _state.value.bicycle!!.serverUrl, commsToken = "onegai"
                 )
             }.onError {
                 _events.send(MyCycleEvent.Error(it))
+            }
+            _state.update {
+                it.copy(
+                    isAwaitingUnlock = false
+                )
             }
         }
     }
