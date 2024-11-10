@@ -25,4 +25,5 @@
     <string name="rent_bike">Rent Bike!</string>
     <string name="unlock_cycle">Unlock Cycle</string>
     <string name="rented_cycle_greeting">Here\'s your currently rented cycle, unlock as required</string>
+    <string name="locate_cycle">Locate Cycle</string>
 </resources>

@@ -23,6 +23,11 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "BASE_URL", "\"https://cyclist-core.onrender.com/\"")
+            buildConfigField(
+                "String",
+                "GOOGLE_MAPS_URL",
+                "\"https://www.google.com/maps/search/?api=1&query=\""
+            )
         }
 
         release {
@@ -32,6 +37,11 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", "\"https://cyclist-core.onrender.com/\"")
+            buildConfigField(
+                "String",
+                "GOOGLE_MAPS_URL",
+                "\"https://www.google.com/maps/search/?api=1&query=\""
+            )
         }
     }
     compileOptions {

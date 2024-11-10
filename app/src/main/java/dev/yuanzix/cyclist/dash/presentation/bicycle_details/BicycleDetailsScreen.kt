@@ -1,7 +1,5 @@
 package dev.yuanzix.cyclist.dash.presentation.bicycle_details
 
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -56,9 +55,8 @@ fun BicycleDetailsScreen(
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .scrollable(
+                .verticalScroll(
                     rememberScrollState(),
-                    orientation = Orientation.Vertical
                 )
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally

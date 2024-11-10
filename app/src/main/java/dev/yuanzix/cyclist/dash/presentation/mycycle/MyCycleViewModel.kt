@@ -6,6 +6,7 @@ import dev.yuanzix.cyclist.core.data.UserPreferencesDataStore
 import dev.yuanzix.cyclist.core.domain.util.onError
 import dev.yuanzix.cyclist.core.domain.util.onSuccess
 import dev.yuanzix.cyclist.dash.domain.BicycleDataSource
+import dev.yuanzix.cyclist.dash.domain.openNavigationLink
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -34,6 +35,13 @@ class MyCycleViewModel(
             MyCycleAction.LockUnlockCycle -> {
                 unlockBicycle()
             }
+
+            is MyCycleAction.LocateCycle -> {
+                action.ctx.openNavigationLink(
+                    _state.value.bicycle!!.location.lat,
+                    _state.value.bicycle!!.location.lng
+                )
+            }
         }
     }
 
@@ -50,15 +58,14 @@ class MyCycleViewModel(
                         endTime = ZonedDateTime.parse(res.endTime)
                     )
                 }
-            }
-                .onError { error ->
-                    _state.update { st ->
-                        st.copy(
-                            isLoading = false,
-                        )
-                    }
-                    _events.send(MyCycleEvent.Error(error))
+            }.onError { error ->
+                _state.update { st ->
+                    st.copy(
+                        isLoading = false,
+                    )
                 }
+                _events.send(MyCycleEvent.Error(error))
+            }
         }
     }
 
@@ -70,8 +77,7 @@ class MyCycleViewModel(
             ).onSuccess {
                 // Connect to WiFi and send signal
                 bicycleDataSource.sendSignalToLock(
-                    url = _state.value.bicycle!!.serverUrl,
-                    commsToken = "onegai"
+                    url = _state.value.bicycle!!.serverUrl, commsToken = "onegai"
                 )
             }.onError {
                 _events.send(MyCycleEvent.Error(it))
