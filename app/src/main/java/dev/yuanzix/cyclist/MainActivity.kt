@@ -1,6 +1,10 @@
 package dev.yuanzix.cyclist
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,6 +23,8 @@ class MainActivity : ComponentActivity() {
             CyclistTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     BaseNavigation(
+                        shouldShowRequestPermissionRationale = ::shouldShowRequestPermissionRationale,
+                        openAppSettings = ::openAppSettings,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -27,3 +33,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+fun Activity.openAppSettings() {
+    Intent(
+        Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", packageName, null)
+    ).also(::startActivity)
+}

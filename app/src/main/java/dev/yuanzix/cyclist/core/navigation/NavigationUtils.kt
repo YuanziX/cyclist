@@ -8,7 +8,7 @@ sealed interface Destination {
     data object StartScreen : Destination
 
     @Serializable
-    object Auth {
+    data object Auth : Destination {
         @Serializable
         data object Login : Destination
 
@@ -17,7 +17,7 @@ sealed interface Destination {
     }
 
     @Serializable
-    object Dash {
+    data object Dash : Destination {
         @Serializable
         data object Home : Destination
 

@@ -19,7 +19,7 @@ import java.time.ZonedDateTime
 
 class MyCycleViewModel(
     private val bicycleDataSource: BicycleDataSource,
-    private val dataStore: UserPreferencesDataStore
+    private val dataStore: UserPreferencesDataStore,
 ) : ViewModel() {
     private val _state = MutableStateFlow(MyCycleState())
     val state = _state.onStart {
@@ -31,7 +31,9 @@ class MyCycleViewModel(
 
     fun onAction(action: MyCycleAction) {
         when (action) {
-            MyCycleAction.LockUnlockCycle -> TODO()
+            MyCycleAction.LockUnlockCycle -> {
+                unlockBicycle()
+            }
         }
     }
 
@@ -43,6 +45,7 @@ class MyCycleViewModel(
                 _state.update { st ->
                     st.copy(
                         isLoading = false,
+                        rentalId = res.rentalId,
                         bicycle = res.bike,
                         endTime = ZonedDateTime.parse(res.endTime)
                     )
@@ -58,4 +61,22 @@ class MyCycleViewModel(
                 }
         }
     }
+
+    private fun unlockBicycle() {
+        viewModelScope.launch {
+            bicycleDataSource.unlockBicycle(
+                rentalId = _state.value.rentalId!!,
+                token = dataStore.jwtToken.first()!!,
+            ).onSuccess {
+                // Connect to WiFi and send signal
+                bicycleDataSource.sendSignalToLock(
+                    url = _state.value.bicycle!!.serverUrl,
+                    commsToken = "onegai"
+                )
+            }.onError {
+                _events.send(MyCycleEvent.Error(it))
+            }
+        }
+    }
+
 }

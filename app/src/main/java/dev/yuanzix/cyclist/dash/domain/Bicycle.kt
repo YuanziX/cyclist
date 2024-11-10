@@ -12,6 +12,7 @@ data class Bicycle(
     val pricePerHour: Double,
     val pricePerDay: Double,
     val image: String,
+    val serverUrl: String,
 )
 
 @Serializable

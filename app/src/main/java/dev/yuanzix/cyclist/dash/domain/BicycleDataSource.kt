@@ -16,4 +16,11 @@ interface BicycleDataSource {
         endTime: String,
         token: String
     ): Result<SuccessResponseDto, NetworkError>
+
+    suspend fun unlockBicycle(
+        rentalId: String,
+        token: String,
+    ): Result<SuccessResponseDto, NetworkError>
+
+    suspend fun sendSignalToLock(url: String, commsToken: String): Boolean
 }

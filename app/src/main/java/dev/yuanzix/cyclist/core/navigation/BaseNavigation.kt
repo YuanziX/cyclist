@@ -5,9 +5,15 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kotlin.reflect.KFunction0
+import kotlin.reflect.KFunction1
 
 @Composable
-fun BaseNavigation(modifier: Modifier = Modifier) {
+fun BaseNavigation(
+    shouldShowRequestPermissionRationale: KFunction1<String, Boolean>,
+    openAppSettings: KFunction0<Unit>,
+    modifier: Modifier = Modifier
+) {
     val navController = rememberNavController()
 
     NavHost(
@@ -15,6 +21,8 @@ fun BaseNavigation(modifier: Modifier = Modifier) {
         startDestination = Destination.StartScreen,
     ) {
         startComposable(
+            shouldShowRequestPermissionRationale = shouldShowRequestPermissionRationale,
+            openAppSettings = openAppSettings,
             navController = navController
         )
 

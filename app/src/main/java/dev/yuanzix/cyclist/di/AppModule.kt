@@ -22,6 +22,7 @@ val appModule = module {
     single {
         HttpClientFactory.create(CIO.create())
     }
+
     singleOf(::UserPreferencesDataStore)
     singleOf(::RemoteAuthRepository).bind<AuthRepository>()
     singleOf(::RemoteBicycleDataSource).bind<BicycleDataSource>()

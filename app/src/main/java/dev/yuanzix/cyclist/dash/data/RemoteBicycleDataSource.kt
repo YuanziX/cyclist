@@ -60,4 +60,34 @@ class RemoteBicycleDataSource(
             }
         }
     }
+
+    override suspend fun unlockBicycle(
+        rentalId: String,
+        token: String
+    ): Result<SuccessResponseDto, NetworkError> {
+        return safeCall<SuccessResponseDto> {
+            ktorClient.post(urlString = constructUrl("rental/unlock")) {
+                setBody(mapOf("rentalId" to rentalId))
+                header(HttpHeaders.Authorization, "Bearer $token")
+            }
+        }
+    }
+
+    override suspend fun sendSignalToLock(
+        url: String,
+        commsToken: String,
+    ): Boolean {
+        try {
+            val req = ktorClient.post(urlString = "http://$url/data") {
+                setBody(commsToken)
+            }
+
+            return when (req.status.value) {
+                in 200..299 -> true
+                else -> false
+            }
+        } catch (_: Exception) {
+            return false
+        }
+    }
 }

@@ -46,7 +46,8 @@ class HomeViewModel(
                     if (data.page == data.totalPages) {
                         _state.update {
                             it.copy(
-                                bicycles = it.bicycles + data.bikes,
+                                // it.bicycles + data.bikes
+                                bicycles = data.bikes,
                                 isLastPage = true
                             )
                         }

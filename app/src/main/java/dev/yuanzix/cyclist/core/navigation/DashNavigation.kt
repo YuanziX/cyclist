@@ -87,6 +87,19 @@ fun DashboardNavigation(
                                 ctx, it.error.toString(ctx), Toast.LENGTH_SHORT
                             ).show()
                         }
+
+                        is MyCycleEvent.ShowMessage -> {
+                            println(it.message)
+                            Toast.makeText(
+                                ctx, it.message, Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        MyCycleEvent.CycleUnlockedSuccessfully -> {
+                            Toast.makeText(
+                                ctx, "Cycle unlocked successfully", Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
 

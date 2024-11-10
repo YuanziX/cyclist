@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "dev.yuanzix.cyclist"
-        minSdk = 26
+        minSdk = 29
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -22,7 +22,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000/\"")
+            buildConfigField("String", "BASE_URL", "\"https://cyclist-core.onrender.com/\"")
         }
 
         release {
@@ -31,7 +31,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000/\"")
+            buildConfigField("String", "BASE_URL", "\"https://cyclist-core.onrender.com/\"")
         }
     }
     compileOptions {

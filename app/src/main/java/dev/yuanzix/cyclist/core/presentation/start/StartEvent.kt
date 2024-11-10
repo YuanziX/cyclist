@@ -1,6 +1,7 @@
 package dev.yuanzix.cyclist.core.presentation.start
 
-interface StartEvent {
-    object NavigateToLogin : StartEvent
-    object NavigateToDash : StartEvent
+import dev.yuanzix.cyclist.core.navigation.Destination
+
+sealed interface StartEvent {
+    data class ContinueNavigation(val destination: Destination) : StartEvent
 }

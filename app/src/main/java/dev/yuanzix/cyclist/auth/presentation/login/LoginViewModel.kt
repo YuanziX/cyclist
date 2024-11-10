@@ -9,6 +9,7 @@ import dev.yuanzix.cyclist.core.domain.util.onSuccess
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -42,15 +43,18 @@ class LoginViewModel(
             }
 
             is LoginAction.OnLoginClicked -> {
+                _state.update { it.copy(isLoading = true) }
                 viewModelScope.launch {
                     authRepository.login(
                         email = state.value.email, password = state.value.password
                     ).onSuccess {
+                        _state.update { it.copy(isLoading = false) }
                         userPreferencesDataStore.saveUserDetails(
                             email = state.value.email, jwtToken = it.token
                         )
                         _events.send(LoginEvent.NavigateToDash)
                     }.onError { error ->
+                        _state.update { it.copy(isLoading = false) }
                         _events.send(LoginEvent.Error(error))
                     }
                 }
