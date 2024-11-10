@@ -79,9 +79,17 @@ class MyCycleViewModel(
                 rentalId = _state.value.rentalId!!,
                 token = dataStore.jwtToken.first()!!,
             ).onSuccess {
-                bicycleDataSource.sendSignalToLock(
+                val res = bicycleDataSource.sendSignalToLock(
                     url = _state.value.bicycle!!.serverUrl, commsToken = "onegai"
                 )
+
+                // anti pattern but i'm tired of this "project" already
+                // was gonna call stringResource here but that's an anti pattern too
+                if (res) {
+                    _events.send(MyCycleEvent.ShowMessage("Cycle unlocked successfully"))
+                } else {
+                    _events.send(MyCycleEvent.ShowMessage("Could not unlock cycle"))
+                }
             }.onError {
                 _events.send(MyCycleEvent.Error(it))
             }
